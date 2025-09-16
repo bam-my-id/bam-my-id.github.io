@@ -1,592 +1,670 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Badrul Muhayat - Creative Technologist</title>
-    <meta name="description" content="Portofolio Badrul Muhayat (bam.my.id) - Merancang dan membangun pengalaman digital dari kode hingga konten sebagai Designer, Programmer, Developer, Writer, dan Creator.">
-    <meta name="keywords" content="Badrul Muhayat, portofolio, web developer, ui/ux designer, writer, creator, bam.my.id">
-
+    <title>KOPRI PKC PMII Bali Nusa Tenggara - KOPRI Smart</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts: Inter -->
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide-react@0.294.0/dist/lucide-react.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Konfigurasi Kustom Tailwind -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'gelap': '#0D1117',
-                        'gelap-sekunder': '#161B22',
-                        'aksen': '#2F81F7',
-                        'aksen-hover': '#58A6FF',
-                        'teks-utama': '#C9D1D9',
-                        'teks-sekunder': '#8B949E',
-                        'border-abu': '#30363D',
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- CSS Kustom -->
     <style>
-        .dynamic-subtitle::after {
-            content: '|';
-            animation: blink 1s infinite;
+        /* Define custom color palette */
+        :root {
+            --dark-blue: #2918a9;
+            --light-blue: #0973d6;
+            --yellow-gold: #ffcb05;
+            --black: #000000;
+            --white: #ffffff;
+            --light-gray: #F8F9FA;
         }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--black);
         }
-        .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+            color: var(--dark-blue);
         }
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+        
+        .bg-navy { background-color: var(--dark-blue); }
+        .text-navy { color: var(--dark-blue); }
+        .border-navy { border-color: var(--dark-blue); }
+        .focus-ring-navy:focus { ring-color: var(--dark-blue); border-color: var(--dark-blue); }
+
+        .bg-link-blue { background-color: var(--light-blue); }
+        .text-link-blue { color: var(--light-blue); }
+        .border-link-blue { border-color: var(--light-blue); }
+        
+        .bg-gold { background-color: var(--yellow-gold); }
+        .text-gold { color: var(--yellow-gold); }
+        .border-gold { border-color: var(--yellow-gold); }
+        
+        .hero-section {
+            background-image: linear-gradient(rgba(41, 24, 169, 0.7), rgba(41, 24, 169, 0.7)), url('https://i.imgur.com/OC0fcPL.jpeg');
+            background-size: cover;
+            background-position: center;
         }
-        .animate-on-scroll {
-            opacity: 0;
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            transform: translateY(20px);
+
+        /* Styling for Navigasi Aktif */
+        .nav-link.active {
+            color: var(--yellow-gold);
+            border-bottom: 2px solid var(--yellow-gold);
         }
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        .nav-link:hover {
+            color: var(--yellow-gold);
         }
-        .modal {
-            transition: opacity 0.3s ease;
+
+        /* Timeline styling */
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem;
+            border-left: 2px solid var(--dark-blue);
+        }
+        .timeline-item:last-child {
+            border-left: 2px solid transparent;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -0.7rem;
+            top: 0;
+            height: 1.25rem;
+            width: 1.25rem;
+            border-radius: 9999px;
+            background-color: var(--dark-blue);
+            border: 4px solid var(--light-gray);
+        }
+
+        /* Tab styling */
+        .tab-button.active {
+            background-color: var(--dark-blue);
+            color: var(--white);
         }
     </style>
 </head>
+<body class="bg-gray-100">
 
-<body class="bg-gelap text-teks-utama font-sans">
-
-    <!-- ===== HEADER / NAVBAR ===== -->
-    <header id="navbar" class="bg-gelap/80 backdrop-blur-lg sticky top-0 z-50 border-b border-border-abu transition-all duration-300">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#hero" class="text-xl font-bold text-white hover:text-aksen-hover transition-colors">bam.my.id</a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#services" class="hover:text-aksen-hover transition-colors">Layanan</a>
-                <a href="#projects" class="hover:text-aksen-hover transition-colors">Proyek</a>
-                <a href="#about" class="hover:text-aksen-hover transition-colors">Tentang</a>
-                <a href="#blog" class="hover:text-aksen-hover transition-colors">Blog</a>
-                <a href="#contact" class="bg-aksen text-white px-5 py-2 rounded-md font-semibold hover:bg-aksen-hover transition-colors">Hubungi Saya</a>
+    <!-- HEADER -->
+    <header class="bg-navy text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <img src="https://i.imgur.com/oVp2Dmy.png" alt="Logo KOPRI" class="h-10">
+                    <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII" class="h-10 w-10">
+                    <span class="text-xl font-bold hidden md:block">KOPRI BALI NUSRA</span>
+                </div>
+                <nav class="hidden lg:flex space-x-6">
+                    <a href="#" class="nav-link text-white transition duration-300 pb-1 active" onclick="showPage('beranda')">Beranda</a>
+                    <a href="#" class="nav-link text-white transition duration-300 pb-1" onclick="showPage('tentang')">Tentang</a>
+                    <a href="#" class="nav-link text-white transition duration-300 pb-1" onclick="showPage('program')">Program</a>
+                    <a href="#" class="nav-link text-white transition duration-300 pb-1" onclick="showPage('kontak')">Kontak</a>
+                </nav>
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
             </div>
-            <button id="mobile-menu-button" class="md:hidden">
-                <i data-feather="menu" class="text-white"></i>
-            </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-gelap-sekunder">
-            <a href="#services" class="block py-3 px-6 hover:bg-border-abu">Layanan</a>
-            <a href="#projects" class="block py-3 px-6 hover:bg-border-abu">Proyek</a>
-            <a href="#about" class="block py-3 px-6 hover:bg-border-abu">Tentang</a>
-            <a href="#blog" class="block py-3 px-6 hover:bg-border-abu">Blog</a>
-            <a href="#contact" class="block py-3 px-6 hover:bg-border-abu">Hubungi Saya</a>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-navy">
+            <a href="#" class="block text-white text-center py-3 hover:bg-opacity-80" onclick="showPage('beranda')">Beranda</a>
+            <a href="#" class="block text-white text-center py-3 hover:bg-opacity-80" onclick="showPage('tentang')">Tentang</a>
+            <a href="#" class="block text-white text-center py-3 hover:bg-opacity-80" onclick="showPage('program')">Program</a>
+            <a href="#" class="block text-white text-center py-3 hover:bg-opacity-80" onclick="showPage('kontak')">Kontak</a>
         </div>
     </header>
 
-    <main>
-        <!-- ===== HERO SECTION ===== -->
-        <section id="hero" class="min-h-screen flex items-center bg-gelap">
-            <div class="container mx-auto px-6 text-center">
-                <div class="animate-on-scroll">
-                    <h1 class="text-5xl md:text-7xl font-black text-white mb-4">Badrul Muhayat</h1>
-                    <h2 class="text-2xl md:text-3xl text-aksen font-semibold mb-6">
-                        <span id="dynamic-subtitle" class="dynamic-subtitle"></span>
-                    </h2>
-                    <p class="max-w-3xl mx-auto text-lg md:text-xl text-teks-sekunder mb-10">
-                        Saya merancang, membangun, dan menulis untuk pengalaman digital yang fungsional dan memikat.
-                    </p>
-                    <div class="space-x-4">
-                        <a href="#projects" class="bg-aksen text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-aksen-hover transition-colors">Lihat Proyek Saya</a>
-                        <a href="#about" class="border border-border-abu text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-gelap-sekunder transition-colors">Tentang Saya</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main id="main-content">
 
-        <!-- ===== SERVICES SECTION ===== -->
-        <section id="services" class="py-24 bg-gelap-sekunder">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 animate-on-scroll">
-                    <h2 class="text-4xl font-bold text-white">Apa yang Saya Lakukan</h2>
-                    <p class="text-teks-sekunder mt-2">Solusi terintegrasi dari ide hingga implementasi.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Service Card 1 -->
-                    <div class="bg-gelap p-8 rounded-lg border border-border-abu animate-on-scroll">
-                        <i data-feather="layout" class="w-12 h-12 text-aksen mb-4"></i>
-                        <h3 class="text-2xl font-bold text-white mb-2">Desain</h3>
-                        <p class="text-teks-sekunder">UI/UX, Prototyping, dan Branding yang berpusat pada pengguna untuk menciptakan produk yang intuitif.</p>
-                    </div>
-                    <!-- Service Card 2 -->
-                    <div class="bg-gelap p-8 rounded-lg border border-border-abu animate-on-scroll" style="transition-delay: 100ms;">
-                        <i data-feather="code" class="w-12 h-12 text-aksen mb-4"></i>
-                        <h3 class="text-2xl font-bold text-white mb-2">Pemrograman</h3>
-                        <p class="text-teks-sekunder">Pengembangan front-end dan back-end dengan kode yang bersih, efisien, dan skalabel.</p>
-                    </div>
-                    <!-- Service Card 3 -->
-                    <div class="bg-gelap p-8 rounded-lg border border-border-abu animate-on-scroll" style="transition-delay: 200ms;">
-                        <i data-feather="edit-3" class="w-12 h-12 text-aksen mb-4"></i>
-                        <h3 class="text-2xl font-bold text-white mb-2">Tulisan</h3>
-                        <p class="text-teks-sekunder">Copywriting, artikel teknis, dan konten SEO yang jelas, persuasif, dan bernilai.</p>
-                    </div>
-                    <!-- Service Card 4 -->
-                    <div class="bg-gelap p-8 rounded-lg border border-border-abu animate-on-scroll" style="transition-delay: 300ms;">
-                        <i data-feather="gift" class="w-12 h-12 text-aksen mb-4"></i>
-                        <h3 class="text-2xl font-bold text-white mb-2">Kreasi</h3>
-                        <p class="text-teks-sekunder">Mengeksplorasi ide-ide baru melalui proyek personal, video, dan media kreatif lainnya.</p>
+        <!-- ========================================================== -->
+        <!-- BERANDA PAGE -->
+        <!-- ========================================================== -->
+        <div id="beranda" class="page">
+            <!-- Hero Section -->
+            <section class="hero-section text-white">
+                <div class="container mx-auto px-4 lg:px-8 py-32 text-center">
+                    <h1 class="text-4xl lg:text-6xl font-bold mb-4 leading-tight text-white">KOPRI Smart : Stabilitas dalam Transformasi Kaderisasi yang Totalitas.</h1>
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="showPage('tentang')" class="bg-navy hover:bg-opacity-80 text-white font-bold py-3 px-8 rounded-lg transition duration-300 shadow-lg">Pelajari Visi Kami</button>
+                        <button onclick="showPage('program')" class="bg-gold hover:bg-opacity-80 text-black font-bold py-3 px-8 rounded-lg transition duration-300 shadow-lg">Lihat Program Unggulan</button>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ===== PROJECTS SECTION ===== -->
-        <section id="projects" class="py-24 bg-gelap">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 animate-on-scroll">
-                    <h2 class="text-4xl font-bold text-white">Proyek Pilihan</h2>
-                    <p class="text-teks-sekunder mt-2">Kumpulan karya yang saya banggakan.</p>
-                </div>
-                <!-- Filter Buttons -->
-                <div id="project-filters" class="flex justify-center flex-wrap gap-4 mb-12 animate-on-scroll">
-                    <button class="filter-btn active" data-filter="all">Semua</button>
-                    <button class="filter-btn" data-filter="desain">Desain UI/UX</button>
-                    <button class="filter-btn" data-filter="pengembangan">Pengembangan Web</button>
-                    <button class="filter-btn" data-filter="tulisan">Tulisan & Konten</button>
-                </div>
-                <!-- Project Grid -->
-                <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Projects will be dynamically inserted here by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== ABOUT SECTION ===== -->
-        <section id="about" class="py-24 bg-gelap-sekunder">
-             <div class="container mx-auto px-6">
-                <div class="text-center mb-16 animate-on-scroll">
-                    <h2 class="text-4xl font-bold text-white">Tentang Saya</h2>
-                </div>
-                <div class="flex flex-col md:flex-row items-center gap-12 animate-on-scroll">
-                    <div class="md:w-1/3">
-                        <img src="https://placehold.co/400x400/161B22/C9D1D9?text=BAM" alt="Foto Badrul Muhayat" class="rounded-lg shadow-2xl w-full">
-                    </div>
-                    <div class="md:w-2/3">
-                        <h3 class="text-3xl font-bold text-white mb-4">Creative Technologist & Storyteller</h3>
-                        <p class="text-teks-sekunder leading-relaxed mb-4">
-                            Saya percaya bahwa teknologi terbaik lahir dari perpaduan antara logika dan empati. Sebagai seorang desainer yang bisa coding dan developer yang memahami narasi, saya menjembatani kesenjangan antara ide kreatif dan eksekusi teknis.
-                        </p>
-                        <p class="text-teks-sekunder leading-relaxed">
-                           Filosofi saya adalah membangun produk yang tidak hanya berfungsi dengan baik, tetapi juga terasa menyenangkan saat digunakan dan menceritakan sebuah kisah yang kuat.
-                        </p>
-                    </div>
-                </div>
-             </div>
-        </section>
-        
-        <!-- ===== TESTIMONIALS SECTION ===== -->
-        <section id="testimonials" class="py-24 bg-gelap">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 animate-on-scroll">
-                    <h2 class="text-4xl font-bold text-white">Apa Kata Mereka</h2>
-                    <p class="text-teks-sekunder mt-2">Kepercayaan adalah aset terbesar saya.</p>
-                </div>
-                <div class="relative max-w-3xl mx-auto animate-on-scroll">
-                    <div id="testimonial-container" class="overflow-hidden">
-                        <!-- Testimonials will be dynamically inserted here -->
-                    </div>
-                    <button id="prev-testimonial" class="absolute top-1/2 left-0 -translate-x-12 -translate-y-1/2 bg-gelap-sekunder p-3 rounded-full hover:bg-border-abu transition-colors"><i data-feather="arrow-left"></i></button>
-                    <button id="next-testimonial" class="absolute top-1/2 right-0 translate-x-12 -translate-y-1/2 bg-gelap-sekunder p-3 rounded-full hover:bg-border-abu transition-colors"><i data-feather="arrow-right"></i></button>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- ===== BLOG SECTION ===== -->
-        <section id="blog" class="py-24 bg-gelap-sekunder">
-            <div class="container mx-auto px-6">
-                 <div class="text-center mb-16 animate-on-scroll">
-                    <h2 class="text-4xl font-bold text-white">Artikel & Wawasan</h2>
-                    <p class="text-teks-sekunder mt-2">Berbagi pengetahuan tentang teknologi dan kreativitas.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Blog Card 1 -->
-                    <a href="#" class="block bg-gelap rounded-lg overflow-hidden border border-border-abu project-card animate-on-scroll">
-                        <img src="https://placehold.co/600x400/2F81F7/ffffff?text=Tech" alt="Blog Post Image" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <p class="text-sm text-aksen mb-2">Pengembangan Web • 10 Sep 2025</p>
-                            <h3 class="text-xl font-bold text-white mb-2">5 Alasan Mengapa Next.js adalah Pilihan Tepat untuk Proyek Anda</h3>
-                            <p class="text-teks-sekunder">Sebuah tinjauan mendalam tentang keunggulan framework React yang sedang naik daun ini.</p>
+            <!-- Sambutan Ketua -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4 lg:px-8">
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                        <div class="md:w-1/3 text-center">
+                            <img src="https://i.imgur.com/BK6tJkN.jpeg" alt="Ketua KOPRI" class="rounded-lg shadow-xl mx-auto w-64 h-64 md:w-full md:h-auto object-cover">
                         </div>
-                    </a>
-                    <!-- Blog Card 2 -->
-                    <a href="#" class="block bg-gelap rounded-lg overflow-hidden border border-border-abu project-card animate-on-scroll" style="transition-delay: 100ms;">
-                        <img src="https://placehold.co/600x400/58A6FF/0D1117?text=Design" alt="Blog Post Image" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <p class="text-sm text-aksen mb-2">Desain UI/UX • 02 Sep 2025</p>
-                            <h3 class="text-xl font-bold text-white mb-2">Prinsip Desain Minimalis untuk Antarmuka yang Efektif</h3>
-                            <p class="text-teks-sekunder">Bagaimana mengurangi elemen visual justru dapat meningkatkan pengalaman pengguna.</p>
+                        <div class="md:w-2/3">
+                            <h2 class="text-3xl font-bold mb-4">Sambutan Ketua KOPRI PKC PMII Bali Nusa Tenggara</h2>
+                            <p class="text-black/70 mb-4 text-lg italic">"Visi ini bukan sekadar slogan, melainkan sebuah komitmen dan kerangka kerja. 'KOPRI Smart' adalah ikhtiar kita untuk membangun sebuah organisasi yang modern, berbasis data, dan melek teknologi..."</p>
+                            <p class="text-black/90 mb-6">Kita dituntut untuk menjadi lebih cerdas, lebih strategis, dan lebih adaptif. Inilah ruh yang melandasi lahirnya sebuah visi besar untuk masa khidmat kita bersama: "Menuju KOPRI yang Smart: Stabilitas dalam Transformasi Kaderisasi yang Totalitas."</p>
+                            <a href="#" onclick="showPage('tentang')" class="text-navy font-bold hover:text-link-blue transition duration-300">Baca Selengkapnya &rarr;</a>
                         </div>
-                    </a>
-                    <!-- Blog Card 3 -->
-                    <a href="#" class="block bg-gelap rounded-lg overflow-hidden border border-border-abu project-card animate-on-scroll" style="transition-delay: 200ms;">
-                        <img src="https://placehold.co/600x400/C9D1D9/0D1117?text=Creative" alt="Blog Post Image" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <p class="text-sm text-aksen mb-2">Kreativitas • 28 Ags 2025</p>
-                            <h3 class="text-xl font-bold text-white mb-2">Menjadi Kreator Multi-disiplin: Sebuah Panduan</h3>
-                            <p class="text-teks-sekunder">Tips dan trik untuk mengelola berbagai keahlian tanpa merasa kewalahan.</p>
-                        </div>
-                    </a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ===== CONTACT SECTION ===== -->
-        <section id="contact" class="py-24 bg-gelap">
-            <div class="container mx-auto px-6 text-center">
-                <div class="animate-on-scroll">
-                    <h2 class="text-4xl font-bold text-white">Punya Ide?</h2>
-                    <p class="text-lg text-teks-sekunder mt-4 max-w-2xl mx-auto">Mari wujudkan bersama. Saya selalu terbuka untuk diskusi proyek, kolaborasi, atau sekadar bertukar pikiran.</p>
-                    <a href="mailto:halo@bam.my.id" class="mt-8 inline-block bg-aksen text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-aksen-hover transition-colors">
-                        Hubungi Saya di halo@bam.my.id
-                    </a>
+            <!-- Tiga Pilar Gerakan -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold">Tiga Pilar Gerakan</h2>
+                        <p class="text-black/70 mt-2">Fondasi strategis yang menopang visi KOPRI Smart.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="bg-navy text-gold p-4 rounded-full inline-block mb-4">
+                                <i data-lucide="users-2" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Kaderisasi Holistik & Berkelanjutan</h3>
+                            <p class="text-black/70">Memperkuat mesin internal KOPRI untuk mencetak sumber daya manusia yang unggul.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <div class="bg-navy text-gold p-4 rounded-full inline-block mb-4">
+                                <i data-lucide="lightbulb" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Inovasi Intelektual & Digital</h3>
+                            <p class="text-black/70">Menjadi pusat pemikiran yang disegani dan referensi utama isu perempuan.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <div class="bg-navy text-gold p-4 rounded-full inline-block mb-4">
+                                <i data-lucide="shield-check" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Advokasi Transformatif & Pengabdian</h3>
+                            <p class="text-black/70">Mengubah gagasan menjadi aksi nyata yang bermanfaat bagi masyarakat.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Program Unggulan -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold">Program Unggulan</h2>
+                        <p class="text-black/70 mt-2">Inisiatif strategis untuk mewujudkan Visi KOPRI Smart.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden group">
+                            <img src="https://i.imgur.com/h66FaDi.jpeg" alt="Akademi Kader Digital" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold mb-2">Dialog Publik</h3>
+                                <p class="text-black/70 text-sm mb-4">Mengintegrasikan kompetensi digital ke dalam sistem kaderisasi formal.</p>
+                                <a href="#" onclick="showPage('program')" class="text-sm font-semibold text-navy hover:text-link-blue transition">Lihat Detail &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden group">
+                            <img src="https://i.imgur.com/OPSPUt3.jpeg" alt="Bali Nusra Women's Outlook" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold mb-2">KOPRI Bicara"</h3>
+                                <p class="text-black/70 text-sm mb-4">Menghasilkan data kredibel sebagai dasar advokasi berbasis bukti.</p>
+                                 <a href="#" onclick="showPage('program')" class="text-sm font-semibold text-navy hover:text-link-blue transition">Lihat Detail &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden group">
+                            <img src="https://i.imgur.com/nHXx6WU.jpeg" alt="Posko Advokasi Sahabati" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold mb-2">Sekolah Kader KOPRI</h3>
+                                <p class="text-black/70 text-sm mb-4">Memberikan layanan pendampingan bagi perempuan korban kekerasan.</p>
+                                <a href="#" onclick="showPage('program')" class="text-sm font-semibold text-navy hover:text-link-blue transition">Lihat Detail &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden group">
+                            <img src="https://i.imgur.com/wQOvSm4.jpeg" alt="KOPRI-Pedia" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold mb-2">Bazar dan Konser Amal</h3>
+                                <p class="text-black/70 text-sm mb-4">Membangun pusat sumber daya dan pengetahuan digital yang mudah diakses.</p>
+                                <a href="#" onclick="showPage('program')" class="text-sm font-semibold text-navy hover:text-link-blue transition">Lihat Detail &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Berita & Kegiatan Terkini -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold">Berita & Kegiatan Terkini</h2>
+                        <p class="text-black/70 mt-2">Ikuti perkembangan dan aktivitas terbaru dari KOPRI PKC PMII Bali Nusra.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <img src="https://i.imgur.com/l0DxvrH.jpeg" alt="Berita 1" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <p class="text-sm text-black/60 mb-2">15 September 2025</p>
+                                <h3 class="text-lg font-bold mb-3">Rapat Kerja Daerah Korps PMII Putri</h3>
+                                <a href="#" onclick="showPage('publikasi')" class="font-semibold text-sm text-navy hover:text-link-blue transition">Baca Selengkapnya &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                             <img src="https://i.imgur.com/f3QY4CJ.jpeg" alt="Berita 2" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <p class="text-sm text-black/60 mb-2">10 September 2025</p>
+                                <h3 class="text-lg font-bold mb-3">Dialog Publik KOPRI Bicara</h3>
+                                <a href="#" onclick="showPage('publikasi')" class="font-semibold text-sm text-navy hover:text-link-blue transition">Baca Selengkapnya &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <img src="https://i.imgur.com/giu9zGF.jpeg" alt="Berita 3" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <p class="text-sm text-black/60 mb-2">05 September 2025</p>
+                                <h3 class="text-lg font-bold mb-3">Pelantikan PKC PMII Bali Nusa Tenggara</h3>
+                                <a href="#" onclick="showPage('publikasi')" class="font-semibold text-sm text-navy hover:text-link-blue transition">Baca Selengkapnya &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- TENTANG KAMI PAGE -->
+        <!-- ========================================================== -->
+        <div id="tentang" class="page hidden">
+            <div class="bg-navy text-white py-16">
+                 <div class="container mx-auto px-4 lg:px-8 text-center">
+                    <h1 class="text-4xl font-bold text-white">Tentang KOPRI PMII Bali Nusa Tenggara</h1>
+                    <p class="text-lg mt-2">Mengenal Identitas, Sejarah, dan Visi Gerakan Kami.</p>
                 </div>
             </div>
-        </section>
+
+            <!-- Visi & Misi -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4 lg:px-8">
+                    <h2 class="text-3xl font-bold text-center mb-10">Visi & Misi Kepemimpinan</h2>
+                    <div class="max-w-4xl mx-auto text-center mb-12">
+                         <h3 class="text-2xl font-bold">"Menuju KOPRI yang Smart: Stabilitas dalam Transformasi Kaderisasi yang Totalitas"</h3>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="font-bold text-xl mb-2">KOPRI Smart</h4>
+                            <p class="text-black/80">Setiap gerakan didasarkan pada analisis data dan kajian ilmiah, mengadopsi tata kelola modern, dan adaptif terhadap perubahan untuk memberikan solusi yang relevan.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="font-bold text-xl mb-2">Stabilitas dalam Transformasi</h4>
+                            <p class="text-black/80">Menjaga pilar ideologi Aswaja dan identitas KOPRI, seraya berani berinovasi dalam metode gerakan, sistem kaderisasi, dan paradigma intelektual.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="font-bold text-xl mb-2">Kaderisasi yang Totalitas</h4>
+                            <p class="text-black/80">Menciptakan proses kaderisasi yang holistik, berjenjang, berkelanjutan, dan inklusif untuk melahirkan kader yang unggul secara intelektual, spiritual, dan emosional.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sejarah Gerakan -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4 lg:px-8">
+                    <h2 class="text-3xl font-bold text-center mb-12">Sejarah Gerakan KOPRI</h2>
+                    <div class="max-w-2xl mx-auto">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-xl mb-1">1960 - Divisi Keputrian</h4>
+                            <p class="text-black/70">Pada awal PMII, partisipasi perempuan diwadahi dalam "Divisi Keputrian" dengan fokus pada isu domestik.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-xl mb-1">25 November 1967 - Deklarasi COPRI</h4>
+                            <p class="text-black/70">Corps PMII Poetri (COPRI) dideklarasikan di Semarang, menandai pergeseran dari peran suplementer ke subjek aktif pergerakan.</p>
+                        </div>
+                         <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-xl mb-1">2000 - Pembubaran</h4>
+                            <p class="text-black/70">KOPRI mengalami pembubaran pada Kongres XIII PMII di Medan, memicu perdebatan sengit mengenai statusnya.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-xl mb-1">29 September 2003 - Kelahiran Kembali</h4>
+                            <p class="text-black/70">KOPRI didirikan kembali di Jakarta dengan visi yang lebih tajam dan status sebagai Badan Semi Otonom di setiap level kepengurusan PMII.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Landasan Ideologis -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4 lg:px-8">
+                     <h2 class="text-3xl font-bold text-center mb-12">Landasan Ideologis Aswaja An-Nahdliyah</h2>
+                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div class="flex flex-col items-center">
+                            <div class="bg-gray-100 p-4 rounded-full mb-3"><i data-lucide="scale" class="w-8 h-8 text-navy"></i></div>
+                            <h4 class="font-bold text-lg text-black">Tawassuth</h4>
+                            <p class="text-sm text-black/60">(Moderasi)</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-gray-100 p-4 rounded-full mb-3"><i data-lucide="gavel" class="w-8 h-8 text-navy"></i></div>
+                            <h4 class="font-bold text-lg text-black">Tawazun</h4>
+                            <p class="text-sm text-black/60">(Keseimbangan)</p>
+                        </div>
+                         <div class="flex flex-col items-center">
+                            <div class="bg-gray-100 p-4 rounded-full mb-3"><i data-lucide="gavel" class="w-8 h-8 text-navy"></i></div>
+                            <h4 class="font-bold text-lg text-black">I'tidal</h4>
+                            <p class="text-sm text-black/60">(Keadilan)</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-gray-100 p-4 rounded-full mb-3"><i data-lucide="handshake" class="w-8 h-8 text-navy"></i></div>
+                            <h4 class="font-bold text-lg text-black">Tasamuh</h4>
+                            <p class="text-sm text-black/60">(Toleransi)</p>
+                        </div>
+                     </div>
+                </div>
+            </section>
+
+            <!-- Struktur Kepengurusan -->
+            <section class="py-16 bg-gray-50">
+                 <div class="container mx-auto px-4 lg:px-8">
+                    <h2 class="text-3xl font-bold text-center mb-12">Struktur Kepengurusan</h2>
+                    <div class="bg-white p-8 rounded-lg shadow-md mb-12">
+                        <img src="https://placehold.co/1200x600/FFFFFF/2918a9?text=Bagan+Struktur+Organisasi" alt="Struktur Organisasi" class="w-full h-auto rounded">
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                        <!-- Profile Card -->
+                        <div class="text-center">
+                            <img src="https://i.imgur.com/BK6tJkN.jpeg" alt="Nama Pengurus" class="w-40 h-40 mx-auto rounded-full shadow-lg mb-4">
+                            <h4 class="font-bold text-lg">Nurhalifah</h4>
+                            <p class="text-black/70">Ketua</p>
+                        </div>
+                         <!-- Profile Card -->
+                        <div class="text-center">
+                            <img src="https://i.imgur.com/bFYae0H.jpeg" alt="Nama Pengurus" class="w-40 h-40 mx-auto rounded-full shadow-lg mb-4">
+                            <h4 class="font-bold text-lg">Fitriani Yudha</h4>
+                            <p class="text-black/70">Sekretaris</p>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- PROGRAM PAGE -->
+        <!-- ========================================================== -->
+        <div id="program" class="page hidden">
+             <div class="bg-navy text-white py-16">
+                 <div class="container mx-auto px-4 lg:px-8 text-center">
+                    <h1 class="text-4xl font-bold text-white">Program Kerja Strategis</h1>
+                    <p class="text-lg mt-2">Peta jalan untuk mewujudkan Visi KOPRI Smart.</p>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 lg:px-8 py-16">
+                <!-- Tabs -->
+                <div class="mb-8 flex justify-center border-b border-gray-300">
+                    <button class="tab-button py-2 px-6 font-semibold text-black/70 hover:text-navy focus:outline-none active" onclick="openTab(event, 'pilar1')">Pendidikan & Pelatihan</button>
+                    <button class="tab-button py-2 px-6 font-semibold text-black/70 hover:text-navy focus:outline-none" onclick="openTab(event, 'pilar2')">Intelektual & Digital</button>
+                    <button class="tab-button py-2 px-6 font-semibold text-black/70 hover:text-navy focus:outline-none" onclick="openTab(event, 'pilar3')">Advokasi & Pengabdian</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="pilar1" class="tab-content">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-3">Akademi Kader Digital (AKAD)</h3>
+                            <p class="text-black/80 mb-2"><strong>Tujuan:</strong> Mengintegrasikan kompetensi digital ke dalam sistem kaderisasi.</p>
+                            <p class="text-black/80"><strong>Kegiatan:</strong> Pengembangan kurikulum literasi digital, advokasi medsos, keamanan siber, dan analisis data dasar. Membangun Sistem Informasi Manajemen Kader (SIMKA).</p>
+                        </div>
+                         <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-3">Mentorship Sahabati-Alumni (MENTARI)</h3>
+                            <p class="text-black/80 mb-2"><strong>Tujuan:</strong> Menjembatani transfer pengetahuan dan jaringan antara kader aktif dan alumni.</p>
+                            <p class="text-black/80"><strong>Kegiatan:</strong> Platform digital untuk menghubungkan mentee dan mentor, sesi sharing, dan workshop pengembangan karier.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-3">Sekolah Kajian Gender & Aswaja (SKGA)</h3>
+                            <p class="text-black/80 mb-2"><strong>Tujuan:</strong> Melahirkan kader spesialis dengan kedalaman analisis gender dari perspektif Aswaja.</p>
+                            <p class="text-black/80"><strong>Kegiatan:</strong> Program intensif untuk kader pilihan, pendalaman teori gender kritis, feminisme, dan analisis berbasis Aswaja.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pilar2" class="tab-content hidden">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-3">Riset "Bali Nusra Women's Outlook"</h3>
+                            <p class="text-black/80 mb-2"><strong>Tujuan:</strong> Menghasilkan data kredibel mengenai isu strategis perempuan.</p>
+                            <p class="text-black/80"><strong>Kegiatan:</strong> Riset tahunan partisipatif, publikasi laporan, dan pembuatan produk turunan seperti infografis dan policy brief untuk advokasi berbasis bukti.</p>
+                        </div>
+                         <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-3">Platform Digital "KOPRI-Pedia"</h3>
+                            <p class="text-black/80 mb-2"><strong>Tujuan:</strong> Membangun pusat sumber daya pengetahuan digital.</p>
+                            <p class="text-black/80"><strong>Kegiatan:</strong> Membuat portal berisi perpustakaan digital, bank data riset, materi kaderisasi, dan direktori ahli kader/alumni.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-3">Mimbar Intelektual KOPRI (MIKIR)</h3>
+                            <p class="text-black/80 mb-2"><strong>Tujuan:</strong> Memperkuat citra KOPRI sebagai organisasi intelektual.</p>
+                            <p class="text-black/80"><strong>Kegiatan:</strong> Seri diskusi, webinar, dan podcast rutin yang membahas isu aktual dengan pisau analisis gender dan Aswaja.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pilar3" class="tab-content hidden">
+                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-3">Posko Advokasi Sahabati (PAS)</h3>
+                            <p class="text-black/80 mb-2"><strong>Tujuan:</strong> Memberikan layanan pendampingan bagi perempuan dan advokasi kebijakan.</p>
+                            <p class="text-black/80"><strong>Kegiatan:</strong> Menyediakan ruang aman, konseling awal, rujukan hukum, dan analisis data kasus untuk advokasi kebijakan daerah.</p>
+                        </div>
+                         <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-3">Gerakan PERWIRA LESTARI</h3>
+                            <p class="text-black/80 mb-2"><strong>Tujuan:</strong> Meningkatkan kemandirian ekonomi kader dan perempuan.</p>
+                            <p class="text-black/80"><strong>Kegiatan:</strong> Pelatihan wirausaha di sektor ekonomi kreatif dan pariwisata berkelanjutan, dengan penekanan pada produk ramah lingkungan.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-3">KOPRI Mengawal Desa (KMD)</h3>
+                            <p class="text-black/80 mb-2"><strong>Tujuan:</strong> Mendorong implementasi perencanaan dan penganggaran desa yang responsif gender.</p>
+                            <p class="text-black/80"><strong>Kegiatan:</strong> Pendampingan di desa binaan, advokasi penganggaran responsif gender (APBDes), dan kerja sama dengan pemerintah desa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ========================================================== -->
+        <!-- KONTAK PAGE -->
+        <!-- ========================================================== -->
+        <div id="kontak" class="page hidden">
+            <div class="bg-navy text-white py-16">
+                 <div class="container mx-auto px-4 lg:px-8 text-center">
+                    <h1 class="text-4xl font-bold text-white">Hubungi Kami</h1>
+                    <p class="text-lg mt-2">Kami siap terhubung, berdiskusi, dan berkolaborasi.</p>
+                </div>
+            </div>
+
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4 lg:px-8">
+                    <div class="flex flex-col lg:flex-row gap-12">
+                        <!-- Info Kontak & Peta -->
+                        <div class="lg:w-1/2">
+                            <h2 class="text-2xl font-bold mb-6">Informasi Kontak</h2>
+                            <div class="space-y-4 text-black/80">
+                                <div class="flex items-start">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-navy mr-4 mt-1"></i>
+                                    <span>Alamat Sekretariat Jl. Catur Warga No. 9A Kelurahan Pejanggik, Kota Mataram, Provinsi NTB.</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i data-lucide="mail" class="w-5 h-5 text-navy mr-4 mt-1"></i>
+                                    <span>kopribalinusra@email.com</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i data-lucide="phone" class="w-5 h-5 text-navy mr-4 mt-1"></i>
+                                    <span>+62 853-3394-2540</span>
+                                </div>
+                            </div>
+                            <div class="mt-8 rounded-lg overflow-hidden shadow-md">
+                               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126223.754753738!2d115.15856711995874!3d-8.672688647571329!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2409b0e5e8083%3A0x8674b105b4b3e83e!2sDenpasar%2C%20Kota%20Denpasar%2C%20Bali!5e0!3m2!1sid!2sid!4v1699945396683!5m2!1sid!2sid" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+
+                        <!-- Formulir Kontak -->
+                        <div class="lg:w-1/2 bg-gray-50 p-8 rounded-lg shadow-md">
+                             <h2 class="text-2xl font-bold mb-6">Kirim Pesan</h2>
+                             <form action="#" method="POST" class="space-y-4">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-black/80">Nama Lengkap</label>
+                                    <input type="text" name="name" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-black/80">Alamat Email</label>
+                                    <input type="email" name="email" id="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required>
+                                </div>
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-black/80">Pesan</label>
+                                    <textarea name="message" id="message" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="w-full bg-navy text-white py-3 px-4 rounded-lg font-semibold hover:bg-opacity-80 transition-colors">Kirim Pesan</button>
+                                </div>
+                             </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Layanan Aduan -->
+                    <div class="mt-16 border-t pt-10 border-gold">
+                        <h2 class="text-2xl font-bold text-center mb-4">Layanan Aduan Sahabati (PAS)</h2>
+                        <p class="text-black/70 text-center max-w-2xl mx-auto mb-6">Jika Anda atau seseorang yang Anda kenal mengalami kekerasan atau diskriminasi, jangan ragu untuk menghubungi kami melalui saluran khusus di bawah ini. Kerahasiaan data Anda terjamin.</p>
+                        <div class="text-center font-semibold text-navy">
+                            <p>Hotline/WhatsApp: +62 853-3394-2540</p>
+                            <p>Email Aduan: kopribalinusra@email.com</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
     </main>
-
-    <!-- ===== FOOTER ===== -->
-    <footer class="bg-gelap-sekunder border-t border-border-abu">
-        <div class="container mx-auto px-6 py-8">
-            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-                <p class="text-teks-sekunder mb-4 md:mb-0">&copy; <span id="year"></span> Badrul Muhayat (bam.my.id). All rights reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="#" aria-label="GitHub" class="text-teks-sekunder hover:text-white"><i data-feather="github"></i></a>
-                    <a href="#" aria-label="LinkedIn" class="text-teks-sekunder hover:text-white"><i data-feather="linkedin"></i></a>
-                    <a href="#" aria-label="Twitter" class="text-teks-sekunder hover:text-white"><i data-feather="twitter"></i></a>
-                    <a href="#" aria-label="Dribbble" class="text-teks-sekunder hover:text-white"><i data-feather="dribbble"></i></a>
+    
+    <!-- FOOTER -->
+    <footer class="bg-navy text-white">
+        <div class="container mx-auto px-4 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Kolom 1: Info Organisasi -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="https://i.imgur.com/oVp2Dmy.png" alt="Logo KOPRI" class="h-8">
+                        <h3 class="font-bold text-lg">KOPRI PMII Bali Nusra</h3>
+                    </div>
+                    <p class="text-white/70 text-sm">Korps Pergerakan Mahasiswa Islam Indonesia Putri<br>Pengurus Koordinator Cabang Bali Nusa Tenggara.</p>
+                    <p class="text-white/70 text-sm mt-2">Alamat Sekretariat Jl. Catur Warga No. 9A Kelurahan Pejanggik,<br>Kota Mataram, Provinsi NTB.</p>
                 </div>
+                <!-- Kolom 2: Peta Situs -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Peta Situs</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="showPage('beranda')" class="text-white/70 hover:text-gold">Beranda</a></li>
+                        <li><a href="#" onclick="showPage('tentang')" class="text-white/70 hover:text-gold">Tentang</a></li>
+                        <li><a href="#" onclick="showPage('program')" class="text-white/70 hover:text-gold">Program</a></li>
+                        <li><a href="#" onclick="showPage('kontak')" class="text-white/70 hover:text-gold">Kontak</a></li>
+                    </ul>
+                </div>
+                <!-- Kolom 3: Kontak -->
+                 <div>
+                    <h3 class="font-bold text-lg mb-4">Kontak</h3>
+                     <ul class="space-y-2 text-sm text-white/70">
+                        <li>Email: kopribalinusra@email.com</li>
+                        <li>Telepon: +62 853-3394-2540</li>
+                    </ul>
+                </div>
+                 <!-- Kolom 4: Media Sosial -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Ikuti Kami</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white/70 hover:text-gold"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-white/70 hover:text-gold"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-white/70 hover:text-gold"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-white/70 hover:text-gold"><i data-lucide="youtube" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/20 mt-8 pt-6 text-center text-sm text-white/50">
+                <p>&copy; 2025 PKC KOPRI Bali Nusa Tenggara. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
-    
-    <!-- Project Modal -->
-    <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-[100] opacity-0 pointer-events-none">
-        <div id="modal-content" class="bg-gelap-sekunder rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-border-abu relative transform scale-95 transition-transform duration-300">
-            <!-- Modal content will be injected here -->
-        </div>
-    </div>
 
-
-    <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // ----- Feather Icons -----
-            feather.replace();
+        // Inisialisasi Lucide Icons
+        lucide.createIcons();
 
-            // ----- Dynamic Subtitle -----
-            const subtitles = ["UI/UX Designer", "Full-Stack Developer", "Content Creator", "Creative Technologist"];
-            let subtitleIndex = 0;
-            let charIndex = 0;
-            const subtitleElement = document.getElementById('dynamic-subtitle');
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Fungsi untuk menampilkan halaman
+        function showPage(pageId) {
+            // Sembunyikan semua halaman
+            pages.forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Tampilkan halaman yang dipilih
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            }
             
-            function typeSubtitle() {
-                if (charIndex < subtitles[subtitleIndex].length) {
-                    subtitleElement.textContent += subtitles[subtitleIndex].charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeSubtitle, 100);
+            // Update Navigasi Aktif
+            const pageMap = {
+                'beranda': 0, 'tentang': 1, 'program': 2, 'publikasi': 3, 'jaringan': 4, 'kontak': 5
+            };
+            const activeIndex = pageMap[pageId];
+            
+            document.querySelectorAll('header .nav-link').forEach((link, index) => {
+                if (index === activeIndex) {
+                    link.classList.add('active');
                 } else {
-                    setTimeout(eraseSubtitle, 2000);
-                }
-            }
-
-            function eraseSubtitle() {
-                if (charIndex > 0) {
-                    subtitleElement.textContent = subtitles[subtitleIndex].substring(0, charIndex - 1);
-                    charIndex--;
-                    setTimeout(eraseSubtitle, 50);
-                } else {
-                    subtitleIndex = (subtitleIndex + 1) % subtitles.length;
-                    setTimeout(typeSubtitle, 500);
-                }
-            }
-            typeSubtitle();
-
-
-            // ----- Mobile Menu -----
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            // Close mobile menu on link click
-            document.querySelectorAll('#mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-            });
-
-            // ----- Footer Year -----
-            document.getElementById('year').textContent = new Date().getFullYear();
-
-            // ----- Animation on Scroll -----
-            const scrollElements = document.querySelectorAll('.animate-on-scroll');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            scrollElements.forEach(el => observer.observe(el));
-            
-            // ----- Project Data -----
-            const projects = [
-                {
-                    title: "Platform E-learning Interaktif",
-                    category: "pengembangan",
-                    image: "https://placehold.co/600x400/2F81F7/ffffff?text=E-Learning",
-                    tags: ["React", "Node.js", "MongoDB", "UI/UX"],
-                    description: "Sebuah platform e-learning modern yang dirancang untuk meningkatkan interaksi antara siswa dan pengajar melalui kuis interaktif, forum diskusi, dan video conference.",
-                    role: "Lead Developer & UI/UX Designer",
-                    challenge: "Menciptakan pengalaman belajar yang tidak membosankan dan mudah diakses di berbagai perangkat, sekaligus menyediakan sistem manajemen konten yang kuat untuk para pengajar.",
-                    solution: "Menggunakan arsitektur microservices dengan React di front-end untuk antarmuka yang responsif dan Node.js di back-end. Desain UI/UX difokuskan pada gamifikasi untuk meningkatkan engagement pengguna."
-                },
-                {
-                    title: "Desain Ulang Aplikasi Mobile Banking",
-                    category: "desain",
-                    image: "https://placehold.co/600x400/58A6FF/0D1117?text=Fintech",
-                    tags: ["Figma", "UX Research", "Prototyping"],
-                    description: "Proyek desain ulang total untuk aplikasi mobile banking dengan fokus pada penyederhanaan alur transaksi dan peningkatan keamanan.",
-                    role: "UI/UX Designer",
-                    challenge: "Menyederhanakan fitur-fitur kompleks perbankan menjadi antarmuka yang bisa dipahami oleh pengguna dari berbagai latar belakang teknis tanpa mengorbankan fungsionalitas.",
-                    solution: "Melakukan riset pengguna mendalam, membuat user journey maps, dan mengembangkan prototipe interaktif di Figma. Hasilnya adalah desain yang bersih, modern, dan 30% lebih cepat untuk transaksi umum."
-                },
-                {
-                    title: "Blog Teknologi untuk Developer",
-                    category: "tulisan",
-                    image: "https://placehold.co/600x400/C9D1D9/0D1117?text=Content",
-                    tags: ["SEO", "Content Strategy", "Technical Writing"],
-                    description: "Mengelola dan menulis konten untuk blog teknologi yang menargetkan audiens developer, mencakup topik dari JavaScript modern hingga arsitektur cloud.",
-                    role: "Writer & Content Strategist",
-                    challenge: "Menghasilkan konten teknis yang akurat, mudah dipahami, dan menduduki peringkat tinggi di mesin pencari untuk kata kunci yang kompetitif.",
-                    solution: "Mengembangkan pilar konten berdasarkan riset kata kunci, menulis artikel mendalam (lebih dari 2000 kata), dan mengoptimalkan setiap postingan untuk SEO on-page. Berhasil meningkatkan trafik organik sebesar 150% dalam 6 bulan."
-                },
-                {
-                    title: "Website Company Profile Agensi Kreatif",
-                    category: "pengembangan",
-                    image: "https://placehold.co/600x400/161B22/C9D1D9?text=Agency",
-                    tags: ["Gatsby.js", "Headless CMS", "GSAP"],
-                    description: "Membangun website company profile yang sangat cepat dan interaktif untuk sebuah agensi kreatif, menampilkan portofolio mereka dengan animasi yang halus.",
-                    role: "Front-end Developer",
-                    challenge: "Website harus memiliki performa loading di bawah 1 detik dan menampilkan animasi yang kompleks tanpa mengorbankan kecepatan atau aksesibilitas.",
-                    solution: "Menggunakan Gatsby.js untuk static site generation (SSG), Contentful sebagai headless CMS, dan library GSAP untuk animasi berbasis scroll. Hasilnya adalah skor Lighthouse 98+."
-                },
-                {
-                    title: "Dashboard Analitik SaaS",
-                    category: "desain",
-                    image: "https://placehold.co/600x400/30363D/ffffff?text=Dashboard",
-                    tags: ["UI Design", "Data Visualization", "Figma"],
-                    description: "Merancang antarmuka dashboard untuk produk SaaS yang menyajikan data kompleks dalam format visual yang mudah dimengerti.",
-                    role: "UI Designer",
-                    challenge: "Mengubah tabel data yang padat dan membingungkan menjadi grafik dan visualisasi yang intuitif dan actionable bagi pengguna bisnis.",
-                    solution: "Menerapkan prinsip-prinsip desain visualisasi data, membuat sistem desain modular untuk komponen chart, dan memastikan konsistensi di seluruh platform."
-                },
-                {
-                    title: "Seri Artikel 'Deep Dive into CSS'",
-                    category: "tulisan",
-                    image: "https://placehold.co/600x400/2F81F7/ffffff?text=CSS",
-                    tags: ["Technical Writing", "CSS", "Education"],
-                    description: "Sebuah seri artikel yang membahas topik-topik CSS tingkat lanjut seperti Grid, Flexbox, dan Custom Properties secara mendalam.",
-                    role: "Writer",
-                    challenge: "Menjelaskan konsep teknis yang rumit dengan cara yang mudah dipahami oleh pemula sekalipun, menggunakan contoh kode dan analogi yang efektif.",
-                    solution: "Setiap artikel distrukturkan dengan jelas, dari teori dasar hingga contoh praktis yang interaktif menggunakan CodePen. Seri ini mendapatkan sambutan positif di komunitas developer."
-                }
-            ];
-            
-            const projectGrid = document.getElementById('project-grid');
-            const projectFilters = document.getElementById('project-filters');
-
-            function displayProjects(filter) {
-                projectGrid.innerHTML = '';
-                const filteredProjects = (filter === 'all') ? projects : projects.filter(p => p.category === filter);
-                
-                filteredProjects.forEach((project, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'project-card bg-gelap-sekunder rounded-lg overflow-hidden border border-border-abu animate-on-scroll cursor-pointer';
-                    card.style.transitionDelay = `${index * 100}ms`;
-                    card.dataset.index = projects.indexOf(project);
-                    card.innerHTML = `
-                        <img src="${project.image}" alt="${project.title}" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <p class="text-sm text-aksen capitalize">${project.category.replace('-', ' ')}</p>
-                            <h3 class="text-xl font-bold text-white mt-2">${project.title}</h3>
-                        </div>
-                    `;
-                    projectGrid.appendChild(card);
-                    
-                    card.addEventListener('click', () => openModal(project));
-                });
-
-                // Re-observe new elements
-                const newScrollElements = projectGrid.querySelectorAll('.animate-on-scroll');
-                newScrollElements.forEach(el => observer.observe(el));
-            }
-            
-            projectFilters.addEventListener('click', (e) => {
-                if(e.target.classList.contains('filter-btn')) {
-                    document.querySelector('.filter-btn.active').classList.remove('active');
-                    e.target.classList.add('active');
-                    displayProjects(e.target.dataset.filter);
+                    link.classList.remove('active');
                 }
             });
 
-            // ----- Project Modal -----
-            const modal = document.getElementById('project-modal');
-            const modalContent = document.getElementById('modal-content');
+            // Gulir ke atas halaman
+            window.scrollTo(0, 0);
 
-            function openModal(project) {
-                modalContent.innerHTML = `
-                    <button id="close-modal" class="absolute top-4 right-4 text-teks-sekunder hover:text-white z-10"><i data-feather="x" class="w-8 h-8"></i></button>
-                    <img src="${project.image}" alt="${project.title}" class="w-full h-72 object-cover rounded-t-lg">
-                    <div class="p-8">
-                        <h2 class="text-3xl font-bold text-white mb-2">${project.title}</h2>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            ${project.tags.map(tag => `<span class="bg-border-abu text-teks-utama text-sm font-medium px-3 py-1 rounded-full">${tag}</span>`).join('')}
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-teks-sekunder">
-                            <div class="md:col-span-2">
-                                <h4 class="text-xl font-semibold text-white mb-2">Deskripsi</h4>
-                                <p class="mb-6">${project.description}</p>
-                                <h4 class="text-xl font-semibold text-white mb-2">Tantangan</h4>
-                                <p class="mb-6">${project.challenge}</p>
-                                <h4 class="text-xl font-semibold text-white mb-2">Solusi</h4>
-                                <p>${project.solution}</p>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-semibold text-white mb-2">Peran Saya</h4>
-                                <p class="mb-6">${project.role}</p>
-                                <a href="#" class="bg-aksen text-white px-6 py-3 rounded-md font-semibold hover:bg-aksen-hover transition-colors inline-block w-full text-center">Lihat Live Demo</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                feather.replace(); // Re-initialize icons
-                modal.classList.remove('opacity-0', 'pointer-events-none');
-                modalContent.classList.remove('scale-95');
-                document.body.style.overflow = 'hidden';
+            // Tutup menu mobile jika terbuka
+            mobileMenu.classList.add('hidden');
+        }
 
-                document.getElementById('close-modal').addEventListener('click', closeModal);
-            }
-
-            function closeModal() {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-                modalContent.classList.add('scale-95');
-                document.body.style.overflow = 'auto';
-            }
-            
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // ----- Testimonial Slider -----
-            const testimonials = [
-                {
-                    text: "Badrul adalah seorang profesional sejati. Kemampuannya untuk menerjemahkan ide kompleks menjadi desain yang elegan dan kode yang fungsional benar-benar luar biasa. Proyek kami selesai tepat waktu dan hasilnya melebihi ekspektasi.",
-                    name: "Andi Wijaya",
-                    title: "CEO, Tech Startup"
-                },
-                {
-                    text: "Bekerja dengan Badrul sangat menyenangkan. Dia tidak hanya ahli secara teknis, tetapi juga seorang komunikator yang hebat. Dia selalu memberikan update yang jelas dan proaktif dalam memberikan solusi.",
-                    name: "Siti Rahmawati",
-                    title: "Product Manager, Creative Agency"
-                },
-                {
-                    text: "Konten yang ditulis oleh Badrul untuk blog kami sangat berkualitas. Trafik organik kami meningkat drastis berkat artikel-artikelnya yang mendalam dan teroptimasi dengan baik. Sangat direkomendasikan!",
-                    name: "David Tan",
-                    title: "Head of Marketing, SaaS Company"
-                }
-            ];
-
-            let currentTestimonial = 0;
-            const testimonialContainer = document.getElementById('testimonial-container');
-            const prevBtn = document.getElementById('prev-testimonial');
-            const nextBtn = document.getElementById('next-testimonial');
-
-            function showTestimonial(index) {
-                const t = testimonials[index];
-                testimonialContainer.innerHTML = `
-                    <div class="text-center p-8 bg-gelap-sekunder border border-border-abu rounded-lg animate-fade-in-up">
-                        <p class="text-xl italic text-teks-utama mb-6">"${t.text}"</p>
-                        <p class="font-bold text-white">${t.name}</p>
-                        <p class="text-teks-sekunder">${t.title}</p>
-                    </div>
-                `;
-            }
-            
-            prevBtn.addEventListener('click', () => {
-                currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-                showTestimonial(currentTestimonial);
-            });
-            
-            nextBtn.addEventListener('click', () => {
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                showTestimonial(currentTestimonial);
-            });
-
-
-            // Initial Load
-            displayProjects('all');
-            showTestimonial(currentTestimonial);
-            
-            // CSS for filter buttons
-            const style = document.createElement('style');
-            style.innerHTML = `
-                .filter-btn {
-                    padding: 0.5rem 1.5rem;
-                    border: 1px solid #30363D;
-                    border-radius: 9999px;
-                    background-color: transparent;
-                    color: #8B949E;
-                    transition: all 0.2s;
-                    font-weight: 600;
-                }
-                .filter-btn:hover {
-                    background-color: #161B22;
-                    color: #C9D1D9;
-                }
-                .filter-btn.active {
-                    background-color: #2F81F7;
-                    color: white;
-                    border-color: #2F81F7;
-                }
-            `;
-            document.head.appendChild(style);
-
+        // Event listener untuk menu mobile
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
+
+        // Logika untuk Tab di halaman Program
+        function openTab(evt, tabName) {
+            const tabcontent = document.querySelectorAll("#program .tab-content");
+            tabcontent.forEach(tab => {
+                tab.style.display = "none";
+            });
+            
+            const tablinks = document.querySelectorAll("#program .tab-button");
+             tablinks.forEach(tab => {
+                tab.classList.remove("active");
+            });
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Initialize default tab on program page
+        if(document.getElementById('pilar1')) {
+           document.getElementById('pilar1').style.display = "block";
+        }
     </script>
 
 </body>
